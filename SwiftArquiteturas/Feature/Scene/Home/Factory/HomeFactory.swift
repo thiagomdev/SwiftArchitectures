@@ -1,8 +1,21 @@
-//
-//  HomeFactory.swift
-//  SwiftArquiteturas
-//
-//  Created by Thiago on 10/06/23.
-//
+import UIKit
 
-import Foundation
+enum HomeFactory {
+    static func make() -> UIViewController {
+        let viewController = HomeViewController()
+        let interactor = HomeInteractor()
+        let presenter = HomePresenter()
+        let router = HomeRouter()
+        
+        viewController.interactor = interactor
+        viewController.router = router
+        
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        
+        router.viewController = viewController
+        router.dataStore = interactor
+        
+        return viewController
+    }
+}
