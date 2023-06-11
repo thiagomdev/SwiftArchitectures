@@ -1,25 +1,37 @@
 import UIKit
 
 protocol HomeBusinessLogic {
-  func doSomething(request: Home.Something.Request)
+    func doSomething(request: Home.Something.Request)
 }
 
 protocol HomeDataStore {
-  //var name: String { get set }
+    var name: String { get set }
 }
 
-class HomeInteractor: HomeBusinessLogic, HomeDataStore {
-  var presenter: HomePresentationLogic?
-  var worker: HomeWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-func doSomething(request: Home.Something.Request) {
-    worker = HomeWorker()
-    worker?.doSomeWork()
+final class HomeInteractor {
+    var presenter: HomePresentationLogic?
+    var worker: HomeWorker?
+}
+
+extension HomeInteractor: HomeDataStore {
+    var name: String {
+        get {
+            String()
+        }
+        set {
+            worker?.doSomeWork()
+        }
+    }
     
-    let response = Home.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    
+}
+
+extension HomeInteractor: HomeBusinessLogic {
+    func doSomething(request: Home.Something.Request) {
+        worker = HomeWorker()
+        worker?.doSomeWork()
+        
+        let response = Home.Something.Response()
+        presenter?.presentSomething(response: response)
+    }
 }
