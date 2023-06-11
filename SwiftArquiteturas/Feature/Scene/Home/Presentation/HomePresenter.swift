@@ -1,16 +1,16 @@
 import UIKit
 
 protocol HomePresentationLogic {
-  func presentSomething(response: Home.Something.Response)
+    func presentSomething(response: Home.Something.Response)
 }
 
-class HomePresenter: HomePresentationLogic {
-  weak var viewController: HomeDisplayLogic?
-  
-  // MARK: Do something
-  
-func presentSomething(response: Home.Something.Response) {
-    let viewModel = Home.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+final class HomePresenter {
+    weak var viewController: HomeDisplayLogic?
+}
+
+extension HomePresenter: HomePresentationLogic {
+    func presentSomething(response: Home.Something.Response) {
+        let viewModel = Home.Something.ViewModel()
+        viewController?.displaySomething(viewModel: viewModel)
+    }
 }
