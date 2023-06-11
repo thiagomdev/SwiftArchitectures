@@ -26,6 +26,7 @@ extension LoginRouter: LoginRoutingLogic {
     
     func openRegisterView() {
         let register = RegisterViewController()
-        navigation(view: viewController!, destination: register)
+        guard let viewController = viewController else { return }
+        navigation(view: viewController, destination: register)
     }
 }

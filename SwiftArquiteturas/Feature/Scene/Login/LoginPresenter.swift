@@ -1,8 +1,8 @@
 import UIKit
 
 protocol LoginPresentationLogic {
-    func presentSomething(response: Login.Something.Response)
-    func presentError(_ error: Login.Something.ViewError)
+    func displaySuccess(response: Login.Something.Response)
+    func displayError(_ error: Login.Something.ViewError)
 }
 
 final class LoginPresenter {
@@ -10,12 +10,12 @@ final class LoginPresenter {
 }
 
 extension LoginPresenter: LoginPresentationLogic {
-    func presentSomething(response: Login.Something.Response) {
+    func displaySuccess(response: Login.Something.Response) {
         let viewModel = Login.Something.ViewModel(user: response.user)
         viewController?.displaySomething(viewModel: viewModel)
     }
     
-    func presentError(_ error: Login.Something.ViewError) {
+    func displayError(_ error: Login.Something.ViewError) {
         let viewError = Login.Something.ViewError(error: error.error)
         viewController?.displayViewError(viewError)
     }
