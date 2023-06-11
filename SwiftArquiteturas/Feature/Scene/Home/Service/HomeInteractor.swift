@@ -22,8 +22,6 @@ extension HomeInteractor: HomeDataStore {
             worker?.doSomeWork()
         }
     }
-    
-    
 }
 
 extension HomeInteractor: HomeBusinessLogic {
