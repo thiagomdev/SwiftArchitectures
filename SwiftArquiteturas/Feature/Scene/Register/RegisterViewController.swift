@@ -69,6 +69,7 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
+      view.backgroundColor = .systemCyan
     doSomething()
   }
   

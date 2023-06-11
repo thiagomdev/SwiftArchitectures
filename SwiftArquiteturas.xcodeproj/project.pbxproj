@@ -22,6 +22,19 @@
 		AF37D4062A342B16002DB649 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF37D4052A342B16002DB649 /* UserManager.swift */; };
 		AF44AFDC2A34A81A008A31D6 /* SwiftArquiteturasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44AFDB2A34A81A008A31D6 /* SwiftArquiteturasTests.swift */; };
 		AF69C5A12A35565A004D515D /* HomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5A02A35565A004D515D /* HomeFactory.swift */; };
+		AF69C5A92A355E97004D515D /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5A32A355E97004D515D /* LoginPresenter.swift */; };
+		AF69C5AA2A355E97004D515D /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5A42A355E97004D515D /* LoginWorker.swift */; };
+		AF69C5AB2A355E97004D515D /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5A52A355E97004D515D /* LoginRouter.swift */; };
+		AF69C5AC2A355E97004D515D /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5A62A355E97004D515D /* LoginModels.swift */; };
+		AF69C5AD2A355E97004D515D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5A72A355E97004D515D /* LoginViewController.swift */; };
+		AF69C5AE2A355E97004D515D /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5A82A355E97004D515D /* LoginInteractor.swift */; };
+		AF69C5B02A355FF4004D515D /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5AF2A355FF4004D515D /* LoginFactory.swift */; };
+		AF69C5B72A35898E004D515D /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5B12A35898E004D515D /* RegisterPresenter.swift */; };
+		AF69C5B82A35898E004D515D /* RegisterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5B22A35898E004D515D /* RegisterWorker.swift */; };
+		AF69C5B92A35898E004D515D /* RegisterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5B32A35898E004D515D /* RegisterRouter.swift */; };
+		AF69C5BA2A35898E004D515D /* RegisterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5B42A35898E004D515D /* RegisterModels.swift */; };
+		AF69C5BB2A35898E004D515D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5B52A35898E004D515D /* RegisterViewController.swift */; };
+		AF69C5BC2A35898E004D515D /* RegisterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5B62A35898E004D515D /* RegisterInteractor.swift */; };
 		AFE983A72A34B01D007739DA /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE983A12A34B01D007739DA /* HomePresenter.swift */; };
 		AFE983A82A34B01D007739DA /* HomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE983A22A34B01D007739DA /* HomeWorker.swift */; };
 		AFE983A92A34B01D007739DA /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE983A32A34B01D007739DA /* HomeRouter.swift */; };
@@ -59,6 +72,19 @@
 		AF44AFD92A34A81A008A31D6 /* SwiftArquiteturasTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftArquiteturasTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF44AFDB2A34A81A008A31D6 /* SwiftArquiteturasTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftArquiteturasTests.swift; sourceTree = "<group>"; };
 		AF69C5A02A35565A004D515D /* HomeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFactory.swift; sourceTree = "<group>"; };
+		AF69C5A32A355E97004D515D /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		AF69C5A42A355E97004D515D /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
+		AF69C5A52A355E97004D515D /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		AF69C5A62A355E97004D515D /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
+		AF69C5A72A355E97004D515D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AF69C5A82A355E97004D515D /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		AF69C5AF2A355FF4004D515D /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		AF69C5B12A35898E004D515D /* RegisterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift; sourceTree = "<group>"; };
+		AF69C5B22A35898E004D515D /* RegisterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterWorker.swift; sourceTree = "<group>"; };
+		AF69C5B32A35898E004D515D /* RegisterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRouter.swift; sourceTree = "<group>"; };
+		AF69C5B42A35898E004D515D /* RegisterModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModels.swift; sourceTree = "<group>"; };
+		AF69C5B52A35898E004D515D /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		AF69C5B62A35898E004D515D /* RegisterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInteractor.swift; sourceTree = "<group>"; };
 		AFE983A12A34B01D007739DA /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		AFE983A22A34B01D007739DA /* HomeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorker.swift; sourceTree = "<group>"; };
 		AFE983A32A34B01D007739DA /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
@@ -167,6 +193,7 @@
 		AF37D3F52A341C00002DB649 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				AF69C5A22A355E82004D515D /* Login */,
 				AFE9839F2A34AFFC007739DA /* Home */,
 				AFE983A02A34B002007739DA /* Register */,
 			);
@@ -249,6 +276,20 @@
 			path = Factory;
 			sourceTree = "<group>";
 		};
+		AF69C5A22A355E82004D515D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AF69C5AF2A355FF4004D515D /* LoginFactory.swift */,
+				AF69C5A82A355E97004D515D /* LoginInteractor.swift */,
+				AF69C5A62A355E97004D515D /* LoginModels.swift */,
+				AF69C5A32A355E97004D515D /* LoginPresenter.swift */,
+				AF69C5A52A355E97004D515D /* LoginRouter.swift */,
+				AF69C5A72A355E97004D515D /* LoginViewController.swift */,
+				AF69C5A42A355E97004D515D /* LoginWorker.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		AFE9839F2A34AFFC007739DA /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +305,12 @@
 		AFE983A02A34B002007739DA /* Register */ = {
 			isa = PBXGroup;
 			children = (
+				AF69C5B12A35898E004D515D /* RegisterPresenter.swift */,
+				AF69C5B22A35898E004D515D /* RegisterWorker.swift */,
+				AF69C5B32A35898E004D515D /* RegisterRouter.swift */,
+				AF69C5B42A35898E004D515D /* RegisterModels.swift */,
+				AF69C5B52A35898E004D515D /* RegisterViewController.swift */,
+				AF69C5B62A35898E004D515D /* RegisterInteractor.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -454,20 +501,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF69C5BC2A35898E004D515D /* RegisterInteractor.swift in Sources */,
 				AF37D3D82A341740002DB649 /* AppDelegate.swift in Sources */,
+				AF69C5B82A35898E004D515D /* RegisterWorker.swift in Sources */,
 				AF37D3DA2A341740002DB649 /* SceneDelegate.swift in Sources */,
 				AF37D3FF2A341EB9002DB649 /* UserModel.swift in Sources */,
+				AF69C5B72A35898E004D515D /* RegisterPresenter.swift in Sources */,
+				AF69C5B92A35898E004D515D /* RegisterRouter.swift in Sources */,
 				AFE983AA2A34B01D007739DA /* HomeModels.swift in Sources */,
+				AF69C5AD2A355E97004D515D /* LoginViewController.swift in Sources */,
 				AF37D3FC2A341E50002DB649 /* UserProvider.swift in Sources */,
 				AF37D4022A34234C002DB649 /* Constants.swift in Sources */,
+				AF69C5AB2A355E97004D515D /* LoginRouter.swift in Sources */,
+				AF69C5BA2A35898E004D515D /* RegisterModels.swift in Sources */,
+				AF69C5B02A355FF4004D515D /* LoginFactory.swift in Sources */,
+				AF69C5AE2A355E97004D515D /* LoginInteractor.swift in Sources */,
 				AFE983A72A34B01D007739DA /* HomePresenter.swift in Sources */,
 				AF37D4062A342B16002DB649 /* UserManager.swift in Sources */,
 				AFE983A82A34B01D007739DA /* HomeWorker.swift in Sources */,
+				AF69C5A92A355E97004D515D /* LoginPresenter.swift in Sources */,
 				AF69C5A12A35565A004D515D /* HomeFactory.swift in Sources */,
 				AF37D4042A342673002DB649 /* UserBusiness.swift in Sources */,
 				AFE983AB2A34B01D007739DA /* HomeViewController.swift in Sources */,
 				AFE983A92A34B01D007739DA /* HomeRouter.swift in Sources */,
+				AF69C5AC2A355E97004D515D /* LoginModels.swift in Sources */,
+				AF69C5BB2A35898E004D515D /* RegisterViewController.swift in Sources */,
 				AFE983AC2A34B01D007739DA /* HomeInteractor.swift in Sources */,
+				AF69C5AA2A355E97004D515D /* LoginWorker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
