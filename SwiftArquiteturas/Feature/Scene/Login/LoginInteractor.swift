@@ -22,9 +22,9 @@ extension LoginInteractor: LoginBusinessLogic {
             guard let self = self else { return }
             switch result {
             case let .success(user):
-                self.presenter?.presentSomething(response: .init(user: user))
+                self.presenter?.displaySuccess(response: .init(user: user))
             case let .failure(err):
-                self.presenter?.presentError(.init(error: err))
+                self.presenter?.displayError(.init(error: err))
             }
         })
     }

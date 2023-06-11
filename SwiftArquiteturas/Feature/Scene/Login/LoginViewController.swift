@@ -6,9 +6,11 @@ protocol LoginDisplayLogic: AnyObject {
 }
 
 final class LoginViewController: UIViewController {
+    // MARK: - Properties
     var interactor: LoginBusinessLogic?
     var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
     
+    // MARK: - Elements
     private lazy var containerStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -62,6 +64,7 @@ final class LoginViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
         buildViews()
@@ -69,6 +72,7 @@ final class LoginViewController: UIViewController {
         configureUI()
     }
     
+    // MARK: - Selectors
     @objc
     private func didTapLoginButton() {
         if let email = textFieldEmail.text,
@@ -85,9 +89,9 @@ final class LoginViewController: UIViewController {
     }
 }
 
+// MARK: - LoginDisplayLogic
 extension LoginViewController: LoginDisplayLogic {
     func displaySomething(viewModel: Login.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
     }
     
     func displayViewError(_ error: Login.Something.ViewError) {
@@ -97,7 +101,7 @@ extension LoginViewController: LoginDisplayLogic {
         present(alert, animated: true, completion: nil)
     }
 }
-
+// MARK: - Configure UI
 extension LoginViewController {
     private func buildViews() {
         containerStackView.addArrangedSubview(textFieldEmail)
