@@ -5,7 +5,7 @@ protocol HomeRoutingLogic {
 }
 
 protocol HomeDataPassing {
-//    var dataStore: HomeDataStore? { get }
+    var dataStore: HomeDataStore? { get set }
 }
 
 final class HomeRouter: NSObject {
@@ -17,7 +17,12 @@ extension HomeRouter: HomeRoutingLogic {
 }
 
 extension HomeRouter: HomeDataPassing {
-//    var dataStore: HomeDataStore? {
-//        
-//    }
+    var dataStore: HomeDataStore? {
+        get {
+            nil
+        }
+        set {
+
+        }
+    }
 }
