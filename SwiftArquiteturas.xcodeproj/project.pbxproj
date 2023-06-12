@@ -34,10 +34,7 @@
 		AF69C5BA2A35898E004D515D /* RegisterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5B42A35898E004D515D /* RegisterModels.swift */; };
 		AF69C5BB2A35898E004D515D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5B52A35898E004D515D /* RegisterViewController.swift */; };
 		AF69C5BC2A35898E004D515D /* RegisterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5B62A35898E004D515D /* RegisterInteractor.swift */; };
-		AF69C5C42A359A12004D515D /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5C02A359A12004D515D /* LoginViewControllerTests.swift */; };
-		AF69C5C52A359A12004D515D /* LoginInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5C12A359A12004D515D /* LoginInteractorTests.swift */; };
-		AF69C5C62A359A12004D515D /* LoginWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5C22A359A12004D515D /* LoginWorkerTests.swift */; };
-		AF69C5C72A359A12004D515D /* LoginPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5C32A359A12004D515D /* LoginPresenterTests.swift */; };
+		AF69C5C92A363315004D515D /* RegisterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69C5C82A363315004D515D /* RegisterFactory.swift */; };
 		AFE983A72A34B01D007739DA /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE983A12A34B01D007739DA /* HomePresenter.swift */; };
 		AFE983A82A34B01D007739DA /* HomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE983A22A34B01D007739DA /* HomeWorker.swift */; };
 		AFE983A92A34B01D007739DA /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE983A32A34B01D007739DA /* HomeRouter.swift */; };
@@ -87,10 +84,7 @@
 		AF69C5B42A35898E004D515D /* RegisterModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModels.swift; sourceTree = "<group>"; };
 		AF69C5B52A35898E004D515D /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		AF69C5B62A35898E004D515D /* RegisterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInteractor.swift; sourceTree = "<group>"; };
-		AF69C5C02A359A12004D515D /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
-		AF69C5C12A359A12004D515D /* LoginInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractorTests.swift; sourceTree = "<group>"; };
-		AF69C5C22A359A12004D515D /* LoginWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorkerTests.swift; sourceTree = "<group>"; };
-		AF69C5C32A359A12004D515D /* LoginPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterTests.swift; sourceTree = "<group>"; };
+		AF69C5C82A363315004D515D /* RegisterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFactory.swift; sourceTree = "<group>"; };
 		AFE983A12A34B01D007739DA /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		AFE983A22A34B01D007739DA /* HomeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorker.swift; sourceTree = "<group>"; };
 		AFE983A32A34B01D007739DA /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
@@ -276,14 +270,6 @@
 			path = SwiftArquiteturasTests;
 			sourceTree = "<group>";
 		};
-		AF69C59F2A355644004D515D /* Factory */ = {
-			isa = PBXGroup;
-			children = (
-				AF69C5A02A35565A004D515D /* HomeFactory.swift */,
-			);
-			path = Factory;
-			sourceTree = "<group>";
-		};
 		AF69C5A22A355E82004D515D /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,10 +287,6 @@
 		AF69C5BD2A3599DD004D515D /* LoginTests */ = {
 			isa = PBXGroup;
 			children = (
-				AF69C5C02A359A12004D515D /* LoginViewControllerTests.swift */,
-				AF69C5C12A359A12004D515D /* LoginInteractorTests.swift */,
-				AF69C5C22A359A12004D515D /* LoginWorkerTests.swift */,
-				AF69C5C32A359A12004D515D /* LoginPresenterTests.swift */,
 			);
 			path = LoginTests;
 			sourceTree = "<group>";
@@ -326,11 +308,13 @@
 		AFE9839F2A34AFFC007739DA /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				AF69C59F2A355644004D515D /* Factory */,
-				AFE983B02A34B71D007739DA /* Domain */,
-				AFE983AF2A34B719007739DA /* Service */,
-				AFE983AE2A34B716007739DA /* Presentation */,
-				AFE983AD2A34B713007739DA /* UI */,
+				AF69C5A02A35565A004D515D /* HomeFactory.swift */,
+				AFE983A32A34B01D007739DA /* HomeRouter.swift */,
+				AFE983A22A34B01D007739DA /* HomeWorker.swift */,
+				AFE983A42A34B01D007739DA /* HomeModels.swift */,
+				AFE983A62A34B01D007739DA /* HomeInteractor.swift */,
+				AFE983A12A34B01D007739DA /* HomePresenter.swift */,
+				AFE983A52A34B01D007739DA /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -338,48 +322,15 @@
 		AFE983A02A34B002007739DA /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				AF69C5B12A35898E004D515D /* RegisterPresenter.swift */,
-				AF69C5B22A35898E004D515D /* RegisterWorker.swift */,
-				AF69C5B32A35898E004D515D /* RegisterRouter.swift */,
-				AF69C5B42A35898E004D515D /* RegisterModels.swift */,
-				AF69C5B52A35898E004D515D /* RegisterViewController.swift */,
+				AF69C5C82A363315004D515D /* RegisterFactory.swift */,
 				AF69C5B62A35898E004D515D /* RegisterInteractor.swift */,
+				AF69C5B42A35898E004D515D /* RegisterModels.swift */,
+				AF69C5B12A35898E004D515D /* RegisterPresenter.swift */,
+				AF69C5B32A35898E004D515D /* RegisterRouter.swift */,
+				AF69C5B52A35898E004D515D /* RegisterViewController.swift */,
+				AF69C5B22A35898E004D515D /* RegisterWorker.swift */,
 			);
 			path = Register;
-			sourceTree = "<group>";
-		};
-		AFE983AD2A34B713007739DA /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				AFE983A52A34B01D007739DA /* HomeViewController.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		AFE983AE2A34B716007739DA /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				AFE983A12A34B01D007739DA /* HomePresenter.swift */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		AFE983AF2A34B719007739DA /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				AFE983A62A34B01D007739DA /* HomeInteractor.swift */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		AFE983B02A34B71D007739DA /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				AFE983A32A34B01D007739DA /* HomeRouter.swift */,
-				AFE983A22A34B01D007739DA /* HomeWorker.swift */,
-				AFE983A42A34B01D007739DA /* HomeModels.swift */,
-			);
-			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -551,6 +502,7 @@
 				AF69C5AE2A355E97004D515D /* LoginInteractor.swift in Sources */,
 				AFE983A72A34B01D007739DA /* HomePresenter.swift in Sources */,
 				AF37D4062A342B16002DB649 /* UserManager.swift in Sources */,
+				AF69C5C92A363315004D515D /* RegisterFactory.swift in Sources */,
 				AFE983A82A34B01D007739DA /* HomeWorker.swift in Sources */,
 				AF69C5A92A355E97004D515D /* LoginPresenter.swift in Sources */,
 				AF69C5A12A35565A004D515D /* HomeFactory.swift in Sources */,
@@ -568,10 +520,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF69C5C72A359A12004D515D /* LoginPresenterTests.swift in Sources */,
-				AF69C5C62A359A12004D515D /* LoginWorkerTests.swift in Sources */,
-				AF69C5C52A359A12004D515D /* LoginInteractorTests.swift in Sources */,
-				AF69C5C42A359A12004D515D /* LoginViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

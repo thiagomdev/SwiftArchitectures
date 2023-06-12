@@ -11,12 +11,6 @@ final class UserBusiness {
     init(provider: UserProvider = UserProvider()) {
         self.provider = provider
     }
-    
-    private func displayParamsBasedOn(_ email: String, _ password: String) -> [AnyHashable: Any] {
-        let userModel = UserModel(email: email, password: password)
-        let params: [AnyHashable: Any] = [Constants.ParamsKey.body: [Constants.ParamsKey.userModel: userModel]]
-        return params
-    }
 }
 
 extension UserBusiness: UserBusinessProtocol {
@@ -40,5 +34,13 @@ extension UserBusiness: UserBusinessProtocol {
                 callback(.failure(err))
             }
         }
+    }
+}
+
+extension UserBusiness {
+    private func displayParamsBasedOn(_ email: String, _ password: String) -> [AnyHashable: Any] {
+        let userModel = UserModel(email: email, password: password)
+        let params: [AnyHashable: Any] = [Constants.ParamsKey.body: [Constants.ParamsKey.userModel: userModel]]
+        return params
     }
 }
