@@ -1,8 +1,8 @@
 import UIKit
 
 protocol LoginDisplayLogic: AnyObject {
-    func displaySomething(viewModel: Login.Something.ViewModel)
-    func displayViewError(_ error: Login.Something.ViewError)
+    func displaySomething(viewModel: Login.Make.ViewModel)
+    func displayViewError(_ error: Login.Make.ViewError)
 }
 
 final class LoginViewController: UIViewController {
@@ -78,7 +78,7 @@ final class LoginViewController: UIViewController {
         if let email = textFieldEmail.text,
            let password = textFieldPassword.text {
             let userModel = UserModel(email: email, password: password)
-            let request = Login.Something.Request(user: .init(email: userModel.email, password: userModel.password))
+            let request = Login.Make.Request(user: .init(email: userModel.email, password: userModel.password))
             interactor?.diplayUser(with: request)
         }
     }
@@ -91,10 +91,10 @@ final class LoginViewController: UIViewController {
 
 // MARK: - LoginDisplayLogic
 extension LoginViewController: LoginDisplayLogic {
-    func displaySomething(viewModel: Login.Something.ViewModel) {
+    func displaySomething(viewModel: Login.Make.ViewModel) {
     }
     
-    func displayViewError(_ error: Login.Something.ViewError) {
+    func displayViewError(_ error: Login.Make.ViewError) {
         let error = error.error.localizedDescription
         let alert = UIAlertController(title: "ALERTA!", message: error, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))

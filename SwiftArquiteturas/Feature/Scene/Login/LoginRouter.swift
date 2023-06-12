@@ -15,7 +15,7 @@ final class LoginRouter: NSObject, LoginDataPassing {
     var dataStore: LoginDataStore?
     
     private func navigation(view: LoginViewController, destination: UIViewController) {
-        view.navigationController?.pushViewController(destination, animated: true)
+        view.navigationController?.present(destination, animated: true)
     }
 }
 

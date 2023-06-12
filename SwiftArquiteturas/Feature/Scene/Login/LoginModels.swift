@@ -1,7 +1,7 @@
 import UIKit
 
 enum Login {
-    enum Something {
+    enum Make {
         struct Request {
             var user: UserModel
         }

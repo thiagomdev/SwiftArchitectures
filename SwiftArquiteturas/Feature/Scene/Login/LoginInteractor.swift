@@ -1,11 +1,10 @@
 import UIKit
 
 protocol LoginBusinessLogic {
-    func diplayUser(with request: Login.Something.Request)
+    func diplayUser(with request: Login.Make.Request)
 }
 
-protocol LoginDataStore {
-}
+protocol LoginDataStore { }
 
 final class LoginInteractor {
     var presenter: LoginPresentationLogic?
@@ -17,7 +16,7 @@ final class LoginInteractor {
 }
 
 extension LoginInteractor: LoginBusinessLogic {
-    func diplayUser(with request: Login.Something.Request) {
+    func diplayUser(with request: Login.Make.Request) {
         worker?.loginUser(basedOn: request.user, callback: { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -30,6 +29,4 @@ extension LoginInteractor: LoginBusinessLogic {
     }
 }
 
-extension LoginInteractor: LoginDataStore {
-    
-}
+extension LoginInteractor: LoginDataStore { }
