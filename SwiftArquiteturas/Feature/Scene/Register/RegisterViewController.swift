@@ -54,13 +54,13 @@ final class RegisterViewController: UIViewController, RegisterDisplayLogic {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
-
+    
     private lazy var registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
         button.layer.cornerRadius = 8
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        button.addTarget(self, action: #selector(didTapRegisterButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(registeredUser), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -71,19 +71,38 @@ final class RegisterViewController: UIViewController, RegisterDisplayLogic {
         setupConstraints()
         configureUI()
     }
-
+    
     @objc
-    private func didTapRegisterButton() {
-        if let email = textFieldEmail.text, let password = textFieldPassword.text, let confirmPassword = textFieldConfirmPassword.text, password == confirmPassword {
-            let userModel = UserModel(email: email, password: password)
-            let request = Register.Make.Request(user: .init(email: userModel.email, password: userModel.password))
-            interactor?.diplayUser(with: request)
+    private func registeredUser() {
+        if let email = textFieldEmail.text,
+           let password = textFieldPassword.text,
+           let confirmPassword = textFieldConfirmPassword.text,
+           password == confirmPassword {
+            
+            registered(from: .init(
+                email: email,
+                password: password)
+            )
         }
+        clearAllFields()
+    }
+    
+    private func registered(from user: UserModel) {
+        let user = UserModel(email: user.email, password: user.password)
+        let request = Register.Make.Request(user: user)
+        interactor?.diplayUser(with: request)
+    }
+    
+    private func clearAllFields(from text: String? = nil) {
+        textFieldEmail.text = text
+        textFieldPassword.text = text
+        textFieldConfirmPassword.text = text
     }
 }
 
 extension RegisterViewController {
     func displaySomething(viewModel: Register.Make.ViewModel) {
+        router?.successRegistered()
     }
     
     func displayViewError(_ error: Register.Make.ViewError) {
@@ -124,6 +143,6 @@ extension RegisterViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .systemMint
+        view.backgroundColor = .systemBackground
     }
 }

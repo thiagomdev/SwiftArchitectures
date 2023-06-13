@@ -12,12 +12,11 @@ final class HomeViewController: UIViewController {
     //MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemMint
+        view.backgroundColor = .systemBackground
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        doSomething()
     }
     
     //MARK: - Methods
