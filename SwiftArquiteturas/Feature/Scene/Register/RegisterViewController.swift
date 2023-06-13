@@ -20,41 +20,10 @@ final class RegisterViewController: UIViewController, RegisterDisplayLogic {
         return stack
     }()
     
-    private lazy var textFieldEmail: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Email"
-        textField.borderStyle = .roundedRect
-        textField.adjustsFontSizeToFitWidth = true
-        textField.clearButtonMode = .whileEditing
-        textField.autocapitalizationType = .none
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    
-    private lazy var textFieldPassword: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Password"
-        textField.borderStyle = .roundedRect
-        textField.adjustsFontSizeToFitWidth = true
-        textField.clearButtonMode = .whileEditing
-        textField.isSecureTextEntry = true
-        textField.autocapitalizationType = .none
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    
-    private lazy var textFieldConfirmPassword: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Confirm password"
-        textField.borderStyle = .roundedRect
-        textField.adjustsFontSizeToFitWidth = true
-        textField.clearButtonMode = .whileEditing
-        textField.isSecureTextEntry = true
-        textField.autocapitalizationType = .none
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    
+    private lazy var textFieldEmail = makeTextField("Email")
+    private lazy var textFieldPassword = makeTextField("Password")
+    private lazy var textFieldConfirmPassword = makeTextField("Confirm password")
+ 
     private lazy var registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
@@ -114,7 +83,7 @@ extension RegisterViewController {
 }
 
 // MARK: - Configure UI
-extension RegisterViewController {
+private extension RegisterViewController {
     private func buildViews() {
         containerStackView.addArrangedSubview(textFieldEmail)
         containerStackView.addArrangedSubview(textFieldPassword)
@@ -144,5 +113,19 @@ extension RegisterViewController {
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
+    }
+}
+
+private extension RegisterViewController {
+    private func makeTextField(_ placeholder: String) -> UITextField {
+        let textField = UITextField()
+        textField.placeholder = placeholder
+        textField.borderStyle = .roundedRect
+        textField.adjustsFontSizeToFitWidth = true
+        textField.clearButtonMode = .whileEditing
+        textField.isSecureTextEntry = true
+        textField.autocapitalizationType = .none
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
     }
 }

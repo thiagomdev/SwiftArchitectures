@@ -117,7 +117,7 @@ extension LoginViewController: LoginDisplayLogic {
     }
 }
 // MARK: - Configure UI
-extension LoginViewController {
+private extension LoginViewController {
     private func buildViews() {
         containerStackView.addArrangedSubview(textFieldEmail)
         containerStackView.addArrangedSubview(textFieldPassword)
