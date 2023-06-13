@@ -28,7 +28,7 @@ extension RegisterRouter {
         view: RegisterViewController,
         destination: UIViewController
     ) {
-        destination.modalPresentationStyle = .fullScreen
+//        destination.modalPresentationStyle = .fullScreen
         view.navigationController?.present(destination, animated: true)
     }
 }

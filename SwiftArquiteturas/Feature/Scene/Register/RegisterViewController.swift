@@ -21,8 +21,8 @@ final class RegisterViewController: UIViewController, RegisterDisplayLogic {
     }()
     
     private lazy var textFieldEmail = makeTextField("Email")
-    private lazy var textFieldPassword = makeTextField("Password")
-    private lazy var textFieldConfirmPassword = makeTextField("Confirm password")
+    private lazy var textFieldPassword = makeTextField("Password", securityEntry: true)
+    private lazy var textFieldConfirmPassword = makeTextField("Confirm password", securityEntry: true)
  
     private lazy var registerButton: UIButton = {
         let button = UIButton(type: .system)
@@ -34,11 +34,24 @@ final class RegisterViewController: UIViewController, RegisterDisplayLogic {
         return button
     }()
     
+    private lazy var loading: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView()
+        activity.hidesWhenStopped = true
+        activity.color = .darkGray
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         buildViews()
         setupConstraints()
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loading.stopAnimating()
     }
     
     @objc
@@ -52,6 +65,8 @@ final class RegisterViewController: UIViewController, RegisterDisplayLogic {
                 email: email,
                 password: password)
             )
+            
+            verificationFields(to: email, to: password, and: confirmPassword)
         }
         clearAllFields()
     }
@@ -66,6 +81,16 @@ final class RegisterViewController: UIViewController, RegisterDisplayLogic {
         textFieldEmail.text = text
         textFieldPassword.text = text
         textFieldConfirmPassword.text = text
+    }
+    
+    private func verificationFields(to email: String, to password: String, and confirmPassword: String) {
+        if email.isEmpty || password.isEmpty || password != confirmPassword {
+            loading.stopAnimating()
+            loading.hidesWhenStopped = true
+        } else {
+            loading.startAnimating()
+            loading.hidesWhenStopped = false
+        }
     }
 }
 
@@ -90,6 +115,7 @@ private extension RegisterViewController {
         containerStackView.addArrangedSubview(textFieldConfirmPassword)
         containerStackView.addArrangedSubview(registerButton)
         view.addSubview(containerStackView)
+        view.addSubview(loading)
     }
     
     private func setupConstraints() {
@@ -107,23 +133,26 @@ private extension RegisterViewController {
             view.safeAreaLayoutGuide.trailingAnchor.constraint(
                 equalToSystemSpacingAfter: containerStackView.trailingAnchor,
                 multiplier: 2
-            )
+            ),
+            
+            loading.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loading.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
     private func configureUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .black
     }
 }
 
 private extension RegisterViewController {
-    private func makeTextField(_ placeholder: String) -> UITextField {
+    private func makeTextField(_ placeholder: String, securityEntry: Bool = false) -> UITextField {
         let textField = UITextField()
         textField.placeholder = placeholder
         textField.borderStyle = .roundedRect
         textField.adjustsFontSizeToFitWidth = true
         textField.clearButtonMode = .whileEditing
-        textField.isSecureTextEntry = true
+        textField.isSecureTextEntry = securityEntry
         textField.autocapitalizationType = .none
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField

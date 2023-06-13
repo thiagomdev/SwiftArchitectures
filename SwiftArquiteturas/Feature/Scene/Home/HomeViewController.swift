@@ -9,10 +9,22 @@ final class HomeViewController: UIViewController {
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
     
+    private lazy var welcomeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Welcome to HomeView."
+        label.font = .systemFont(ofSize: 30, weight: .bold)
+        label.textColor = .systemBrown
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     //MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        buildViews()
+        setpConstraints()
+        configureUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,5 +44,22 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: HomeDisplayLogic {
     func displaySomething(viewModel: Home.Something.ViewModel) {
         
+    }
+}
+
+extension HomeViewController {
+    private func buildViews() {
+        view.addSubview(welcomeLabel)
+    }
+    
+    private func setpConstraints() {
+        NSLayoutConstraint.activate([
+            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            welcomeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+    }
+    
+    private func configureUI() {
+        view.backgroundColor = .black
     }
 }

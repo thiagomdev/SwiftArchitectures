@@ -64,6 +64,14 @@ final class LoginViewController: UIViewController {
         return button
     }()
     
+    private lazy var loading: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView()
+        activity.hidesWhenStopped = true
+        activity.color = .darkGray
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
+    }()
+    
     // MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +90,8 @@ final class LoginViewController: UIViewController {
                 email: email,
                 password: password)
             )
+            
+            verificationFields(to: email, and: password)
         }
         clearAllFields()
     }
@@ -100,6 +110,16 @@ final class LoginViewController: UIViewController {
     private func clearAllFields(from text: String? = nil) {
         textFieldEmail.text = text
         textFieldPassword.text = text
+    }
+    
+    private func verificationFields(to email: String, and password: String) {
+        if email.isEmpty || password.isEmpty {
+            loading.stopAnimating()
+            loading.hidesWhenStopped = true
+        } else {
+            loading.startAnimating()
+            loading.hidesWhenStopped = false
+        }
     }
 }
 
@@ -124,6 +144,7 @@ private extension LoginViewController {
         containerStackView.addArrangedSubview(loginButton)
         containerStackView.addArrangedSubview(registerButton)
         view.addSubview(containerStackView)
+        view.addSubview(loading)
     }
     
     private func setupConstraints() {
@@ -141,11 +162,14 @@ private extension LoginViewController {
             view.safeAreaLayoutGuide.trailingAnchor.constraint(
                 equalToSystemSpacingAfter: containerStackView.trailingAnchor,
                 multiplier: 2
-            )
+            ),
+            
+            loading.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loading.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
     private func configureUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .black
     }
 }
