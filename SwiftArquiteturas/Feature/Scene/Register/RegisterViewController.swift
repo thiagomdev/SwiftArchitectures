@@ -74,41 +74,36 @@ final class RegisterViewController: UIViewController, RegisterDisplayLogic {
     
     @objc
     private func registeredUser() {
-        router?.successRegistered()
-        
-//        if let email = textFieldEmail.text,
-//           let password = textFieldPassword.text,
-//           let confirmPassword = textFieldConfirmPassword.text,
-//           password == confirmPassword {
-////            validationFields(to: email, password: password, confirmPassword: confirmPassword)
-//            let user = UserModel(email: email, password: password)
-//            register(user)
-//        }
+        if let email = textFieldEmail.text,
+           let password = textFieldPassword.text,
+           let confirmPassword = textFieldConfirmPassword.text,
+           password == confirmPassword {
+            
+            registered(from: .init(
+                email: email,
+                password: password)
+            )
+        }
+        clearAllFields()
     }
     
-    private func register(_ user: UserModel) {
+    private func registered(from user: UserModel) {
+        let user = UserModel(email: user.email, password: user.password)
         let request = Register.Make.Request(user: user)
         interactor?.diplayUser(with: request)
     }
     
-    private func validationFields(to email: String, password: String, confirmPassword: String) {
-        if email.isEmpty || password.count <= 4 || password != confirmPassword {
-            // TODO -  Alert error
-            showAlert(message: "O email \(email) ou a senha \(password),\npodem estar errados. Por favor verificar.")
-        } else {
-            register(.init(email: email, password: password))
-        }
-    }
-    
-    private func showAlert(message: String) {
-        let alert = UIAlertController(title: "ALERTA!", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true, completion: nil)
+    private func clearAllFields(from text: String? = nil) {
+        textFieldEmail.text = text
+        textFieldPassword.text = text
+        textFieldConfirmPassword.text = text
     }
 }
 
 extension RegisterViewController {
-    func displaySomething(viewModel: Register.Make.ViewModel) { }
+    func displaySomething(viewModel: Register.Make.ViewModel) {
+        router?.successRegistered()
+    }
     
     func displayViewError(_ error: Register.Make.ViewError) {
         let error = error.error.localizedDescription
@@ -148,6 +143,6 @@ extension RegisterViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .systemBrown
+        view.backgroundColor = .systemBackground
     }
 }

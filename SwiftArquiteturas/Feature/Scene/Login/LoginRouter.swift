@@ -2,6 +2,7 @@ import UIKit
 
 protocol LoginRoutingLogic {
     func openRegisterView()
+    func openHomeView()
 }
 
 protocol LoginDataPassing {
@@ -14,18 +15,32 @@ final class LoginRouter: NSObject, LoginDataPassing {
 }
 
 extension LoginRouter: LoginRoutingLogic {
+    func openHomeView() {
+        let home = HomeFactory.make()
+        guard let viewController = viewController else { return }
+        presentModalNavigation(from: viewController, destination: home)
+    }
+    
     func openRegisterView() {
         let register = RegisterFactory.make()
         guard let viewController = viewController else { return }
-        navigation(view: viewController, destination: register)
+        displayNavigation(from: viewController, destination: register)
     }
 }
 
 extension LoginRouter {
-    private func navigation(
+    private func displayNavigation(from
         view: LoginViewController,
         destination: UIViewController
     ) {
         view.navigationController?.pushViewController(destination, animated: true)
+    }
+    
+    private func presentModalNavigation(from
+        view: LoginViewController,
+        destination: UIViewController
+    ) {
+        destination.modalPresentationStyle = .fullScreen
+        view.navigationController?.present(destination, animated: true)
     }
 }

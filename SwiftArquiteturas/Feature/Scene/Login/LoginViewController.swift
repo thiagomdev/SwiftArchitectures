@@ -77,21 +77,37 @@ final class LoginViewController: UIViewController {
     private func didTapLoginButton() {
         if let email = textFieldEmail.text,
            let password = textFieldPassword.text {
-            let userModel = UserModel(email: email, password: password)
-            let request = Login.Make.Request(user: .init(email: userModel.email, password: userModel.password))
-            interactor?.diplayUser(with: request)
+            
+            displayLoggedIn(user: .init(
+                email: email,
+                password: password)
+            )
         }
+        clearAllFields()
     }
     
     @objc
     private func didTapRegisterButton() {
         router?.openRegisterView()
     }
+    
+    private func displayLoggedIn(user: UserModel) {
+        let user = UserModel(email: user.email, password: user.password)
+        let request = Login.Make.Request(user: user)
+        interactor?.diplayUser(with: request)
+    }
+    
+    private func clearAllFields(from text: String? = nil) {
+        textFieldEmail.text = text
+        textFieldPassword.text = text
+    }
 }
 
 // MARK: - LoginDisplayLogic
 extension LoginViewController: LoginDisplayLogic {
-    func displaySomething(viewModel: Login.Make.ViewModel) { }
+    func displaySomething(viewModel: Login.Make.ViewModel) {
+        router?.openHomeView()
+    }
     
     func displayViewError(_ error: Login.Make.ViewError) {
         let error = error.error.localizedDescription
@@ -130,6 +146,6 @@ extension LoginViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .systemMint
+        view.backgroundColor = .systemBackground
     }
 }
