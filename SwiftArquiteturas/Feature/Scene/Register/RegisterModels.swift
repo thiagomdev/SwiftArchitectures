@@ -1,8 +1,6 @@
 import UIKit
 
 enum Register {
-    // MARK: Use cases
-    
     enum Make {
         struct Request {
             var user: UserModel

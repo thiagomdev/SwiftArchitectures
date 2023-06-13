@@ -91,8 +91,7 @@ final class LoginViewController: UIViewController {
 
 // MARK: - LoginDisplayLogic
 extension LoginViewController: LoginDisplayLogic {
-    func displaySomething(viewModel: Login.Make.ViewModel) {
-    }
+    func displaySomething(viewModel: Login.Make.ViewModel) { }
     
     func displayViewError(_ error: Login.Make.ViewError) {
         let error = error.error.localizedDescription

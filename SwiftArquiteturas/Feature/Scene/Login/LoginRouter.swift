@@ -1,9 +1,7 @@
 import UIKit
 
 protocol LoginRoutingLogic {
-    func openHomeView()
     func openRegisterView()
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
 protocol LoginDataPassing {
@@ -13,20 +11,21 @@ protocol LoginDataPassing {
 final class LoginRouter: NSObject, LoginDataPassing {
     weak var viewController: LoginViewController?
     var dataStore: LoginDataStore?
-    
-    private func navigation(view: LoginViewController, destination: UIViewController) {
-        view.navigationController?.present(destination, animated: true)
-    }
 }
 
 extension LoginRouter: LoginRoutingLogic {
-    func openHomeView() {
-        
-    }
-    
     func openRegisterView() {
-        let register = RegisterViewController()
+        let register = RegisterFactory.make()
         guard let viewController = viewController else { return }
         navigation(view: viewController, destination: register)
+    }
+}
+
+extension LoginRouter {
+    private func navigation(
+        view: LoginViewController,
+        destination: UIViewController
+    ) {
+        view.navigationController?.pushViewController(destination, animated: true)
     }
 }
