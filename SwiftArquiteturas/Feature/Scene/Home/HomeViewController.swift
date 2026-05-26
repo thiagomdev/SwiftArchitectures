@@ -12,7 +12,7 @@ final class HomeViewController: UIViewController {
     //MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .red
     }
     
     override func viewWillAppear(_ animated: Bool) {

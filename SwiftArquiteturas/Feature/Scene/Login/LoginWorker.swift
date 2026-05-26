@@ -5,9 +5,9 @@ protocol LoginWorkerProtocol {
 }
 
 final class LoginWorker {
-    private let manager: UserManager
+    private let manager: UserManagerProtocol
     
-    init(manager: UserManager = UserManager(business: UserBusiness())) {
+    init(manager: UserManagerProtocol) {
         self.manager = manager
     }
 }

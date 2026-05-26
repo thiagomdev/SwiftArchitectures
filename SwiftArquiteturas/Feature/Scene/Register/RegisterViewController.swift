@@ -7,7 +7,7 @@ protocol RegisterDisplayLogic: AnyObject {
 
 final class RegisterViewController: UIViewController, RegisterDisplayLogic {
     var interactor: RegisterBusinessLogic?
-    var router: (NSObjectProtocol & RegisterRoutingLogic & RegisterDataPassing)?
+    var router: (NSObjectProtocol & RegisterRoutingLogic)?
     
     
     // MARK: - Elements

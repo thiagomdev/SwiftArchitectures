@@ -5,42 +5,29 @@ protocol LoginRoutingLogic {
     func openHomeView()
 }
 
-protocol LoginDataPassing {
-    var dataStore: LoginDataStore? { get }
+final class LoginRouter: NSObject, LoginRoutingLogic {
+    weak var viewController: UIViewController?
 }
-
-final class LoginRouter: NSObject, LoginDataPassing {
-    weak var viewController: LoginViewController?
-    var dataStore: LoginDataStore?
-}
-
-extension LoginRouter: LoginRoutingLogic {
-    func openHomeView() {
-        let home = HomeFactory.make()
-        guard let viewController = viewController else { return }
-        presentModalNavigation(from: viewController, destination: home)
-    }
-    
-    func openRegisterView() {
-        let register = RegisterFactory.make()
-        guard let viewController = viewController else { return }
-        displayNavigation(from: viewController, destination: register)
+extension LoginRouter {
+    private func push(from view: UIViewController, destination: UIViewController) {
+        DispatchQueue.main.async {
+            view.navigationController?.pushViewController(destination, animated: true)
+        }
     }
 }
 
 extension LoginRouter {
-    private func displayNavigation(from
-        view: LoginViewController,
-        destination: UIViewController
-    ) {
-        view.navigationController?.pushViewController(destination, animated: true)
+    func openHomeView() {
+        let home = HomeFactory.make()
+        guard let viewController = viewController else { return }
+        push(from: viewController, destination: home)
     }
-    
-    private func presentModalNavigation(from
-        view: LoginViewController,
-        destination: UIViewController
-    ) {
-        destination.modalPresentationStyle = .fullScreen
-        view.navigationController?.present(destination, animated: true)
+}
+
+extension LoginRouter {
+    func openRegisterView() {
+        let register = RegisterFactory.make()
+        guard let viewController = viewController else { return }
+        push(from: viewController, destination: register)
     }
 }

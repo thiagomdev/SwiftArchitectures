@@ -8,7 +8,7 @@ protocol LoginDisplayLogic: AnyObject {
 final class LoginViewController: UIViewController {
     // MARK: - Properties
     var interactor: LoginBusinessLogic?
-    var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
+    var routing = LoginRouter()
     
     // MARK: - Elements
     private lazy var containerStackView: UIStackView = {
@@ -88,7 +88,8 @@ final class LoginViewController: UIViewController {
     
     @objc
     private func didTapRegisterButton() {
-        router?.openRegisterView()
+        routing.openRegisterView()
+//        router?.openRegisterView()
     }
     
     private func displayLoggedIn(user: UserModel) {
@@ -106,7 +107,7 @@ final class LoginViewController: UIViewController {
 // MARK: - LoginDisplayLogic
 extension LoginViewController: LoginDisplayLogic {
     func displaySomething(viewModel: Login.Make.ViewModel) {
-        router?.openHomeView()
+        routing.openHomeView()
     }
     
     func displayViewError(_ error: Login.Make.ViewError) {

@@ -6,15 +6,18 @@ enum Login {
             var user: UserModel
         }
         
-        struct Response {
+        struct Response: Equatable {
             var user: UserModel
         }
         
-        struct ViewModel {
+        struct ViewModel: Equatable {
             var user: UserModel
         }
         
-        struct ViewError {
+        struct ViewError: Equatable {
+            static func == (lhs: Login.Make.ViewError, rhs: Login.Make.ViewError) -> Bool {
+                return lhs.error.localizedDescription == rhs.error.localizedDescription
+            }
             var error: Error
         }
     }
