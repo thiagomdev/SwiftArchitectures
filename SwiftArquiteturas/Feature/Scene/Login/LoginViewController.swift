@@ -73,10 +73,10 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Selectors
+    
     @objc
     private func didTapLoginButton() {
-        Task { [weak self] in
-            guard let self else { return }
+        Task {
             if let email = textFieldEmail.text,
                let password = textFieldPassword.text {
                 try await displayLoggedIn(user: .init(

@@ -74,8 +74,7 @@ final class RegisterViewController: UIViewController, RegisterDisplayLogic {
     
     @objc
     private func registeredUser() {
-        Task { [weak self] in
-            guard let self else { return }
+        Task {
             if let email = textFieldEmail.text,
                let password = textFieldPassword.text,
                let confirmPassword = textFieldConfirmPassword.text,
