@@ -12,47 +12,28 @@ import Foundation
 @Suite("🧪 Login Worker")
 struct LoginWorkerTests {
     @Test
-    func loginUserShouldBeReturnedValidUserModelInformation() {
+    func loginUserShouldBeReturnedValidUserModelInformation() async throws {
         let (sut, managerSpy) = makeSut()
-        var userModel: UserModel = .fixture()
-        managerSpy.shouldBeReturned = .success(userModel)
+        let userModel: UserModel = .fixture()
+        managerSpy.shouldBeReturned = userModel
         
-        sut.loginUser(basedOn: userModel) { result in
-            switch result {
-            case let .success(model):
-                userModel = model
-            case let .failure(anyError):
-                Issue.record("Expected .success, got \(anyError)")
-            }
-        }
+        let expected = try await #require(sut.loginUser(basedOn: userModel))
         
         #expect(managerSpy.loginUserCalled)
         #expect(managerSpy.loginUserCount == 1)
-        #expect(managerSpy.expectedEmail == userModel.email)
-        #expect(managerSpy.expectedPassword == userModel.password)
+        #expect(managerSpy.shouldBeReturned == expected)
     }
     
     @Test
-    func loginUserShouldNotReturnedValidUserModelInformation() {
+    func loginUserShouldNotReturnedValidUserModelInformation() async throws {
         let (sut, managerSpy) = makeSut()
         let userModel: UserModel = .fixture()
-        var anyError: NSError = .init(domain: "any-error", code: -999)
-        
-        managerSpy.shouldBeReturned = .failure(anyError)
-        
-        sut.loginUser(basedOn: .fixture()) { result in
-            switch result {
-            case let .success(model):
-                Issue.record("Expected .failure, got \(model)")
-            case let .failure(err):
-                anyError = err as NSError
-            }
+
+        managerSpy.shouldThrow = APIError.invalidResponse
+
+        await #expect(throws: APIError.self) {
+            _ = try await sut.loginUser(basedOn: userModel)
         }
-        
-        #expect(managerSpy.loginUserCalled)
-        #expect(managerSpy.loginUserCount == 1)
-        #expect(managerSpy.expectedEmail == userModel.email)
-        #expect(managerSpy.expectedPassword == userModel.password)
     }
 }
 
@@ -65,26 +46,29 @@ extension LoginWorkerTests {
 }
 
 final class ManagerSpy: UserManagerProtocol {
-    var shouldBeReturned: (Result<UserModel, any Error>)?
-    
+
+    var shouldBeReturned: UserModel?
+    var shouldThrow: Error?
+
     private(set) var expectedEmail: String?
     private(set) var expectedPassword: String?
-    
+
     private(set) var loginUserCalled: Bool = false
     private(set) var loginUserCount: Int = 0
-    
-    func loginUser(basedOn email: String, password: String, callback: @escaping (Result<UserModel, any Error>) -> Void) {
+
+    func loginUser(basedOn email: String, password: String) async throws -> UserModel? {
         loginUserCalled = true
         loginUserCount += 1
         expectedEmail = email
         expectedPassword = password
-        if let shouldBeReturned {
-            callback(shouldBeReturned)
-        }
+        if let shouldThrow { throw shouldThrow }
+        return shouldBeReturned
     }
-    
-    func registerUser(basedOn email: String, password: String, callback: @escaping (Result<UserModel, any Error>) -> Void) {
+
+    func registerUser(basedOn email: String, password: String) async throws -> UserModel? {
         expectedEmail = email
         expectedPassword = password
+        if let shouldThrow { throw shouldThrow }
+        return shouldBeReturned
     }
 }

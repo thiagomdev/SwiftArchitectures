@@ -12,11 +12,11 @@ import Foundation
 @Suite("🧪 Login Interactor")
 struct LoginInteractorTests {
     @Test
-    func diplayUserShouldBeReturnedResponseUserModel() {
+    func diplayUserShouldBeReturnedResponseUserModel() async throws {
         let (sut, doubles) = makeSut()
-        doubles.workerSpy.shouldBeReturned = .success(.fixture())
+        doubles.workerSpy.shouldBeReturned = .fixture()
         
-        sut.diplayUser(with: .init(user: .fixture()))
+        try await sut.diplayUser(with: .init(user: .fixture()))
         
         #expect(doubles.workerSpy.loginUserCalled)
         #expect(doubles.workerSpy.loginUserCount == 1)
@@ -24,16 +24,30 @@ struct LoginInteractorTests {
     }
     
     @Test
-    func diplayUserShouldBeReturnedAnyError() {
+    func diplayUserShouldBeReturnedAnyError() async throws {
         let (sut, doubles) = makeSut()
         let anyError: NSError = .init(domain: "any_error", code: -999)
-        doubles.workerSpy.shouldBeReturned = .failure(anyError)
-        
-        sut.diplayUser(with: .init(user: .fixture()))
-        
+        let userModel: UserModel = .fixture()
+        doubles.workerSpy.shouldThrow = anyError
+
+        try await sut.diplayUser(with: .init(user: userModel))
+
         #expect(doubles.workerSpy.loginUserCalled)
         #expect(doubles.workerSpy.loginUserCount == 1)
         #expect(doubles.presenterSpy.messages == [.displayError(.init(error: anyError))])
+    }
+
+    @Test
+    func diplayUserShouldBeReturnedInvalidResponseWhenWorkerReturnsNil() async throws {
+        let (sut, doubles) = makeSut()
+        let userModel: UserModel = .fixture()
+        doubles.workerSpy.shouldBeReturned = nil
+
+        try await sut.diplayUser(with: .init(user: userModel))
+
+        #expect(doubles.workerSpy.loginUserCalled)
+        #expect(doubles.workerSpy.loginUserCount == 1)
+        #expect(doubles.presenterSpy.messages == [.displayError(.init(error: APIError.invalidResponse))])
     }
 }
 
@@ -46,24 +60,23 @@ extension LoginInteractorTests {
     private func makeSut() -> (sut: LoginInteractor, doubles: Doubles) {
         let workerSpy = LoginWorkerSpy()
         let presenterSpy = LoginPresentationLogicSpy()
-        let sut = LoginInteractor(worker: workerSpy)
-        sut.presenter = presenterSpy
+        let sut = LoginInteractor(worker: workerSpy, presenter: presenterSpy)
         return (sut,(workerSpy, presenterSpy))
     }
 }
 
 final class LoginWorkerSpy: LoginWorkerProtocol {
-    var shouldBeReturned: (Result<UserModel, Error>)?
-    
+    var shouldBeReturned: UserModel?
+    var shouldThrow: Error?
+
     private(set) var loginUserCalled: Bool = false
     private(set) var loginUserCount: Int = 0
-    
-    func loginUser(basedOn user: SwiftArquiteturas.UserModel, callback: @escaping (Result<UserModel, Error>) -> Void) {
+
+    func loginUser(basedOn user: UserModel) async throws -> UserModel? {
         loginUserCalled = true
         loginUserCount += 1
-        if let shouldBeReturned {
-            callback(shouldBeReturned)
-        }
+        if let shouldThrow { throw shouldThrow }
+        return shouldBeReturned
     }
 }
 

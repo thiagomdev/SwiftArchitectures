@@ -16,10 +16,13 @@ final class LoginInteractor {
 
 extension LoginInteractor: LoginBusinessLogic {
     func diplayUser(with request: Login.Make.Request) async throws {
-        guard let user = try await worker.loginUser(basedOn: request.user) else {
-            return presenter.displayError(.init(error: APIError.invalidResponse))
+        do {
+            guard let user = try await worker.loginUser(basedOn: request.user) else {
+                return presenter.displayError(.init(error: APIError.invalidResponse))
+            }
+            presenter.displaySuccess(response: .init(user: user))
+        } catch {
+            presenter.displayError(.init(error: error))
         }
-        
-        presenter.displaySuccess(response: .init(user: user))
     }
 }
