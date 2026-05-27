@@ -1,38 +1,24 @@
 import Foundation
 
 protocol UserManagerProtocol {
-    func loginUser(basedOn email: String, password: String, callback: @escaping (Result<UserModel, Error>) -> Void)
-    func registerUser(basedOn email: String, password: String, callback: @escaping (Result<UserModel, Error>) -> Void)
+    func loginUser(basedOn email: String, password: String) async throws -> UserModel?
+    func registerUser(basedOn email: String, password: String) async throws -> UserModel?
 }
 
 final class UserManager {
-    private let business: UserBusiness
+    private let business: UserBusinessProtocol
     
-    init(business: UserBusiness = UserBusiness()) {
+    init(business: UserBusinessProtocol) {
         self.business = business
     }
 }
 
 extension UserManager: UserManagerProtocol {
-    func loginUser(basedOn email: String, password: String, callback: @escaping (Result<UserModel, Error>) -> Void) {
-        business.loginUser(basedOn: email, password: password) { result in
-            switch result {
-            case let .success(userModel):
-                callback(.success(userModel))
-            case let .failure(err):
-                callback(.failure(err))
-            }
-        }
+    func loginUser(basedOn email: String, password: String) async throws -> UserModel? {
+        try await business.loginUser(basedOn: email, password: password)
     }
     
-    func registerUser(basedOn email: String, password: String, callback: @escaping (Result<UserModel, Error>) -> Void) {
-        business.registerUser(basedOn: email, password: password) { result in
-            switch result {
-            case let .success(userModel):
-                callback(.success(userModel))
-            case let .failure(err):
-                callback(.failure(err))
-            }
-        }
+    func registerUser(basedOn email: String, password: String) async throws -> UserModel? {
+        try await business.registerUser(basedOn: email, password: password)
     }
 }

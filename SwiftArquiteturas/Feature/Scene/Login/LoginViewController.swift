@@ -75,27 +75,28 @@ final class LoginViewController: UIViewController {
     // MARK: - Selectors
     @objc
     private func didTapLoginButton() {
-        if let email = textFieldEmail.text,
-           let password = textFieldPassword.text {
-            
-            displayLoggedIn(user: .init(
-                email: email,
-                password: password)
-            )
+        Task { [weak self] in
+            guard let self else { return }
+            if let email = textFieldEmail.text,
+               let password = textFieldPassword.text {
+                try await displayLoggedIn(user: .init(
+                    email: email,
+                    password: password)
+                )
+            }
+            clearAllFields()
         }
-        clearAllFields()
     }
     
     @objc
     private func didTapRegisterButton() {
         routing.openRegisterView()
-//        router?.openRegisterView()
     }
     
-    private func displayLoggedIn(user: UserModel) {
+    private func displayLoggedIn(user: UserModel) async throws {
         let user = UserModel(email: user.email, password: user.password)
         let request = Login.Make.Request(user: user)
-        interactor?.diplayUser(with: request)
+        try await interactor?.diplayUser(with: request)
     }
     
     private func clearAllFields(from text: String? = nil) {

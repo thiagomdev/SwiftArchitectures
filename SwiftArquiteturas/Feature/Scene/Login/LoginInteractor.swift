@@ -1,31 +1,25 @@
 import UIKit
 
 protocol LoginBusinessLogic {
-    func diplayUser(with request: Login.Make.Request)
+    func diplayUser(with request: Login.Make.Request) async throws
 }
 
-protocol LoginDataStore { }
-
 final class LoginInteractor {
-    var presenter: LoginPresentationLogic?
-    private var worker: LoginWorkerProtocol?
+    private let worker: LoginWorkerProtocol
+    private let presenter: LoginPresentationLogic
     
-    init(worker: LoginWorkerProtocol) {
+    init(worker: LoginWorkerProtocol, presenter: LoginPresentationLogic) {
         self.worker = worker
+        self.presenter = presenter
     }
 }
 
 extension LoginInteractor: LoginBusinessLogic {
-    func diplayUser(with request: Login.Make.Request) {
-        worker?.loginUser(basedOn: request.user, callback: { [weak self] result in
-            switch result {
-            case let .success(user):
-                self?.presenter?.displaySuccess(response: .init(user: user))
-            case let .failure(err):
-                self?.presenter?.displayError(.init(error: err))
-            }
-        })
+    func diplayUser(with request: Login.Make.Request) async throws {
+        guard let user = try await worker.loginUser(basedOn: request.user) else {
+            return presenter.displayError(.init(error: APIError.invalidResponse))
+        }
+        
+        presenter.displaySuccess(response: .init(user: user))
     }
 }
-
-extension LoginInteractor: LoginDataStore { }

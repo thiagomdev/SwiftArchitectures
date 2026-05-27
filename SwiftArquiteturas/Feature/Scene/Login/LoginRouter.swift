@@ -18,9 +18,11 @@ extension LoginRouter {
 
 extension LoginRouter {
     func openHomeView() {
-        let home = HomeFactory.make()
-        guard let viewController = viewController else { return }
-        push(from: viewController, destination: home)
+        Task {
+            let home = await HomeFactory.make()
+            guard let viewController = viewController else { return }
+            push(from: viewController, destination: home)
+        }
     }
 }
 

@@ -74,23 +74,25 @@ final class RegisterViewController: UIViewController, RegisterDisplayLogic {
     
     @objc
     private func registeredUser() {
-        if let email = textFieldEmail.text,
-           let password = textFieldPassword.text,
-           let confirmPassword = textFieldConfirmPassword.text,
-           password == confirmPassword {
-            
-            registered(from: .init(
-                email: email,
-                password: password)
-            )
+        Task { [weak self] in
+            guard let self else { return }
+            if let email = textFieldEmail.text,
+               let password = textFieldPassword.text,
+               let confirmPassword = textFieldConfirmPassword.text,
+               password == confirmPassword {
+                try await registered(from: .init(
+                    email: email,
+                    password: password)
+                )
+            }
+            clearAllFields()
         }
-        clearAllFields()
     }
     
-    private func registered(from user: UserModel) {
+    private func registered(from user: UserModel) async throws {
         let user = UserModel(email: user.email, password: user.password)
         let request = Register.Make.Request(user: user)
-        interactor?.diplayUser(with: request)
+        try await interactor?.diplayUser(with: request)
     }
     
     private func clearAllFields(from text: String? = nil) {

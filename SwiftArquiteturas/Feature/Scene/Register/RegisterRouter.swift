@@ -10,13 +10,16 @@ final class RegisterRouter: NSObject {
 
 extension RegisterRouter: RegisterRoutingLogic {
     func successRegistered() {
-        let register = HomeFactory.make()
-        guard let viewController = viewController else { return }
-        present(view: viewController, destination: register)
+        Task {
+            let register = await HomeFactory.make()
+            guard let viewController = viewController else { return }
+            await present(view: viewController, destination: register)
+        }
     }
 }
 
 extension RegisterRouter {
+    @MainActor
     private func present(view: UIViewController, destination: UIViewController) {
         destination.modalPresentationStyle = .fullScreen
         view.navigationController?.present(destination, animated: true)

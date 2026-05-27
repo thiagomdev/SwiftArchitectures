@@ -1,6 +1,7 @@
 import UIKit
 
 enum HomeFactory {
+    @MainActor
     static func make() -> UIViewController {
         let viewController = HomeViewController()
         let interactor = HomeInteractor()

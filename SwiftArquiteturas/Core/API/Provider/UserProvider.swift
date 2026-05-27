@@ -2,8 +2,8 @@ import Foundation
 import FirebaseAuth
 
 protocol UserProviderProtocol {
-    func login(user basedOn: [AnyHashable: Any], callback: @escaping (Result<UserModel, Error>) -> Void)
-    func register(user basedOn: [AnyHashable: Any], callback: @escaping (Result<UserModel, Error>) -> Void)
+    func login(user basedOn: [AnyHashable: Any]) async throws -> UserModel?
+    func register(user basedOn: [AnyHashable: Any]) async throws -> UserModel?
 }
 
 final class UserProvider {
@@ -11,31 +11,19 @@ final class UserProvider {
 }
 
 extension UserProvider: UserProviderProtocol {
-    func login(user basedOn: [AnyHashable : Any], callback: @escaping (Result<UserModel, Error>) -> Void) {
+    func login(user basedOn: [AnyHashable : Any]) async throws -> UserModel? {
+        guard let body: NSDictionary = basedOn[Constants.ParamsKey.body] as? NSDictionary else { return nil }
+        guard let userModel = body[Constants.ParamsKey.userModel] as? UserModel else { return nil }
         
-        guard let body: NSDictionary = basedOn[Constants.ParamsKey.body] as? NSDictionary else { return }
-        guard let userModel = body[Constants.ParamsKey.userModel] as? UserModel else { return }
-        
-        auth.signIn(withEmail: userModel.email, password: userModel.password) { result, error in
-            if let error = error {
-                callback(.failure(error))
-            } else {
-                callback(.success(userModel))
-            }
-        }
+        try await auth.signIn(withEmail: userModel.email, password: userModel.password)
+        return userModel
     }
     
-    func register(user basedOn: [AnyHashable : Any], callback: @escaping (Result<UserModel, Error>) -> Void) {
+    func register(user basedOn: [AnyHashable : Any]) async throws -> UserModel? {
+        guard let body: NSDictionary = basedOn[Constants.ParamsKey.body] as? NSDictionary else { return nil }
+        guard let userModel = body[Constants.ParamsKey.userModel] as? UserModel else { return nil }
         
-        guard let body: NSDictionary = basedOn[Constants.ParamsKey.body] as? NSDictionary else { return }
-        guard let userModel = body[Constants.ParamsKey.userModel] as? UserModel else { return }
-        
-        auth.createUser(withEmail: userModel.email, password: userModel.password) { result, error in
-            if let error = error {
-                callback(.failure(error))
-            } else {
-                callback(.success(userModel))
-            }
-        }
+        try await auth.createUser(withEmail: userModel.email, password: userModel.password)
+        return userModel
     }
 }

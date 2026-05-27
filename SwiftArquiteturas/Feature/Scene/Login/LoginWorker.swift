@@ -1,7 +1,7 @@
 import UIKit
 
 protocol LoginWorkerProtocol {
-    func loginUser(basedOn user: UserModel, callback: @escaping (Result<UserModel, Error>) -> Void)
+    func loginUser(basedOn user: UserModel) async throws -> UserModel?
 }
 
 final class LoginWorker {
@@ -13,14 +13,7 @@ final class LoginWorker {
 }
 
 extension LoginWorker: LoginWorkerProtocol {
-    func loginUser(basedOn user: UserModel, callback: @escaping (Result<UserModel, Error>) -> Void) {
-        manager.loginUser(basedOn: user.email, password: user.password) { result in
-            switch result {
-            case let .success(user):
-                callback(.success(user))
-            case let .failure(err):
-                callback(.failure(err))
-            }
-        }
+    func loginUser(basedOn user: UserModel) async throws -> UserModel? {
+        try await manager.loginUser(basedOn: user.email, password: user.password)
     }
 }

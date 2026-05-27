@@ -1,26 +1,19 @@
 import UIKit
 
 protocol RegisterWorkerProtocol {
-    func registerUser(basedOn user: UserModel, callback: @escaping (Result<UserModel, Error>) -> Void)
+    func registerUser(basedOn user: UserModel) async throws -> UserModel?
 }
 
 final class RegisterWorker {
-    private let manager: UserManager
+    private let manager: UserManagerProtocol
     
-    init(manager: UserManager = UserManager(business: UserBusiness())) {
+    init(manager: UserManagerProtocol) {
         self.manager = manager
     }
 }
 
 extension RegisterWorker: RegisterWorkerProtocol {
-    func registerUser(basedOn user: UserModel, callback: @escaping (Result<UserModel, Error>) -> Void) {
-        manager.registerUser(basedOn: user.email, password: user.password) { result in
-            switch result {
-            case let .success(user):
-                callback(.success(user))
-            case let .failure(err):
-                callback(.failure(err))
-            }
-        }
+    func registerUser(basedOn user: UserModel) async throws -> UserModel? {
+        try await manager.registerUser(basedOn: user.email, password: user.password)
     }
 }

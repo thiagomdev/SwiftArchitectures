@@ -1,32 +1,24 @@
 import UIKit
 
 protocol RegisterBusinessLogic {
-    func diplayUser(with request: Register.Make.Request)
+    func diplayUser(with request: Register.Make.Request) async throws
 }
 
-protocol RegisterDataStore { }
-
 final class RegisterInteractor {
-    var presenter: RegisterPresentationLogic?
-    private var worker: RegisterWorker?
+    private let presenter: RegisterPresentationLogic
+    private let worker: RegisterWorkerProtocol
     
-    init(worker: RegisterWorker = RegisterWorker()) {
+    init(worker: RegisterWorkerProtocol, presenter: RegisterPresentationLogic) {
         self.worker = worker
+        self.presenter = presenter
     }
 }
 
 extension RegisterInteractor: RegisterBusinessLogic {
-    func diplayUser(with request: Register.Make.Request) {
-        worker?.registerUser(basedOn: request.user, callback: { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case let .success(user):
-                self.presenter?.displaySuccess(response: .init(user: user))
-            case let .failure(err):
-                self.presenter?.displayError(.init(error: err))
-            }
-        })
+    func diplayUser(with request: Register.Make.Request) async throws {
+        guard let user = try await worker.registerUser(basedOn: request.user) else {
+            return presenter.displayError(.init(error: APIError.invalidResponse))
+        }
+        presenter.displaySuccess(response: .init(user: user))
     }
 }
-
-extension RegisterInteractor: RegisterDataStore { }
