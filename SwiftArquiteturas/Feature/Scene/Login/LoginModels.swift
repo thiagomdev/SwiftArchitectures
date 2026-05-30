@@ -14,7 +14,7 @@ enum Login {
             var user: UserModel
         }
         
-        struct ViewError: Equatable {
+        struct ViewError: Equatable, Error {
             static func == (lhs: Login.Make.ViewError, rhs: Login.Make.ViewError) -> Bool {
                 return lhs.error.localizedDescription == rhs.error.localizedDescription
             }

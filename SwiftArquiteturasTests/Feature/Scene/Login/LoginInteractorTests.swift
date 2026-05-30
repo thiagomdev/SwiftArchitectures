@@ -30,7 +30,9 @@ struct LoginInteractorTests {
         let userModel: UserModel = .fixture()
         doubles.workerSpy.shouldThrow = anyError
 
-        try await sut.diplayUser(with: .init(user: userModel))
+        await #expect(throws: Login.Make.ViewError(error: anyError)) {
+            try await sut.diplayUser(with: .init(user: userModel))
+        }
 
         #expect(doubles.workerSpy.loginUserCalled)
         #expect(doubles.workerSpy.loginUserCount == 1)
@@ -43,13 +45,16 @@ struct LoginInteractorTests {
         let userModel: UserModel = .fixture()
         doubles.workerSpy.shouldBeReturned = nil
 
-        try await sut.diplayUser(with: .init(user: userModel))
+        await #expect(throws: Login.Make.ViewError(error: APIError.invalidResponse)) {
+            try await sut.diplayUser(with: .init(user: userModel))
+        }
 
         #expect(doubles.workerSpy.loginUserCalled)
         #expect(doubles.workerSpy.loginUserCount == 1)
         #expect(doubles.presenterSpy.messages == [.displayError(.init(error: APIError.invalidResponse))])
     }
 }
+
 
 extension LoginInteractorTests {
     private typealias Doubles = (
@@ -62,44 +67,5 @@ extension LoginInteractorTests {
         let presenterSpy = LoginPresentationLogicSpy()
         let sut = LoginInteractor(worker: workerSpy, presenter: presenterSpy)
         return (sut,(workerSpy, presenterSpy))
-    }
-}
-
-final class LoginWorkerSpy: LoginWorkerProtocol {
-    var shouldBeReturned: UserModel?
-    var shouldThrow: Error?
-
-    private(set) var loginUserCalled: Bool = false
-    private(set) var loginUserCount: Int = 0
-
-    func loginUser(basedOn user: UserModel) async throws -> UserModel? {
-        loginUserCalled = true
-        loginUserCount += 1
-        if let shouldThrow { throw shouldThrow }
-        return shouldBeReturned
-    }
-}
-
-
-final class LoginPresentationLogicSpy: LoginPresentationLogic {
-    enum Message: Equatable {
-        case displaySuccess(Login.Make.Response)
-        case displayError(Login.Make.ViewError)
-    }
-    
-    private(set) var messages = [Message]()
-    
-    func displaySuccess(response: Login.Make.Response) {
-        messages.append(.displaySuccess(response))
-    }
-    
-    func displayError(_ error: Login.Make.ViewError) {
-        messages.append(.displayError(error))
-    }
-}
-
-extension UserModel {
-    static func fixture(email: String = "email@gmail.com", password: String = "password") -> Self {
-        return .init(email: email, password: password)
     }
 }

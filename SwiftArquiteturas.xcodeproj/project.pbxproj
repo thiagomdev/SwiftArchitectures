@@ -11,6 +11,11 @@
 		AA72124D2FC61B79005AD80B /* LoginInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA72124C2FC61B79005AD80B /* LoginInteractorTests.swift */; };
 		AA72124F2FC63042005AD80B /* LoginPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA72124E2FC63042005AD80B /* LoginPresenterTests.swift */; };
 		AA7212512FC638F6005AD80B /* LoginWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7212502FC638F6005AD80B /* LoginWorkerTests.swift */; };
+		AADFF9502FCAE919005B21C9 /* LoginWorkerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADFF94E2FCAE919005B21C9 /* LoginWorkerSpy.swift */; };
+		AADFF9522FCAE921005B21C9 /* LoginPresentationLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADFF9512FCAE920005B21C9 /* LoginPresentationLogicSpy.swift */; };
+		AADFF9542FCAE94B005B21C9 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADFF9532FCAE947005B21C9 /* Fixture.swift */; };
+		AADFF9582FCAECB5005B21C9 /* LoginPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADFF9572FCAECB5005B21C9 /* LoginPresenterSpy.swift */; };
+		AADFF95A2FCAECD9005B21C9 /* ManagerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADFF9592FCAECD8005B21C9 /* ManagerSpy.swift */; };
 		AF37D3D82A341740002DB649 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF37D3D72A341740002DB649 /* AppDelegate.swift */; };
 		AF37D3DA2A341740002DB649 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF37D3D92A341740002DB649 /* SceneDelegate.swift */; };
 		AF37D3E12A341742002DB649 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF37D3E02A341742002DB649 /* Assets.xcassets */; };
@@ -63,6 +68,11 @@
 		AA72124C2FC61B79005AD80B /* LoginInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractorTests.swift; sourceTree = "<group>"; };
 		AA72124E2FC63042005AD80B /* LoginPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterTests.swift; sourceTree = "<group>"; };
 		AA7212502FC638F6005AD80B /* LoginWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorkerTests.swift; sourceTree = "<group>"; };
+		AADFF94E2FCAE919005B21C9 /* LoginWorkerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorkerSpy.swift; sourceTree = "<group>"; };
+		AADFF9512FCAE920005B21C9 /* LoginPresentationLogicSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresentationLogicSpy.swift; sourceTree = "<group>"; };
+		AADFF9532FCAE947005B21C9 /* Fixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixture.swift; sourceTree = "<group>"; };
+		AADFF9572FCAECB5005B21C9 /* LoginPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterSpy.swift; sourceTree = "<group>"; };
+		AADFF9592FCAECD8005B21C9 /* ManagerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSpy.swift; sourceTree = "<group>"; };
 		AD713DF9C8EC606BBFACE357 /* Pods-SwiftArquiteturas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftArquiteturas.release.xcconfig"; path = "Target Support Files/Pods-SwiftArquiteturas/Pods-SwiftArquiteturas.release.xcconfig"; sourceTree = "<group>"; };
 		AF37D3D42A341740002DB649 /* SwiftArquiteturas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftArquiteturas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF37D3D72A341740002DB649 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +158,7 @@
 		AA7212492FC61B20005AD80B /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				AADFF94F2FCAE919005B21C9 /* Helpers */,
 				AA72124A2FC61B2A005AD80B /* Scene */,
 			);
 			path = Feature;
@@ -169,6 +180,34 @@
 				AA7212502FC638F6005AD80B /* LoginWorkerTests.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		AADFF94F2FCAE919005B21C9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AADFF9562FCAEC4A005B21C9 /* Spies */,
+				AADFF9552FCAEC2E005B21C9 /* Fixture */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		AADFF9552FCAEC2E005B21C9 /* Fixture */ = {
+			isa = PBXGroup;
+			children = (
+				AADFF9532FCAE947005B21C9 /* Fixture.swift */,
+			);
+			path = Fixture;
+			sourceTree = "<group>";
+		};
+		AADFF9562FCAEC4A005B21C9 /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				AADFF9592FCAECD8005B21C9 /* ManagerSpy.swift */,
+				AADFF9572FCAECB5005B21C9 /* LoginPresenterSpy.swift */,
+				AADFF9512FCAE920005B21C9 /* LoginPresentationLogicSpy.swift */,
+				AADFF94E2FCAE919005B21C9 /* LoginWorkerSpy.swift */,
+			);
+			path = Spies;
 			sourceTree = "<group>";
 		};
 		AF37D3CB2A341740002DB649 = {
@@ -502,7 +541,12 @@
 			files = (
 				AA7212512FC638F6005AD80B /* LoginWorkerTests.swift in Sources */,
 				AA72124F2FC63042005AD80B /* LoginPresenterTests.swift in Sources */,
+				AADFF95A2FCAECD9005B21C9 /* ManagerSpy.swift in Sources */,
+				AADFF9502FCAE919005B21C9 /* LoginWorkerSpy.swift in Sources */,
 				AA72124D2FC61B79005AD80B /* LoginInteractorTests.swift in Sources */,
+				AADFF9522FCAE921005B21C9 /* LoginPresentationLogicSpy.swift in Sources */,
+				AADFF9542FCAE94B005B21C9 /* Fixture.swift in Sources */,
+				AADFF9582FCAECB5005B21C9 /* LoginPresenterSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
